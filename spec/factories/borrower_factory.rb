@@ -6,6 +6,6 @@ FactoryGirl.define do
     base_income 9866
     rental_income 389
     commission 345
-    credit_score 980
+    credit_score 480
   end
 end
