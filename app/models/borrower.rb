@@ -6,7 +6,7 @@ class Borrower < ActiveRecord::Base
   validates_presence_of :property_type
   validates_numericality_of :base_income, greater_than: 0
   validates_numericality_of :rental_income, greater_than_or_equal_to: 0
-  validates_numericality_of :credit_score, less_than_or_equal_to: 620
+  validates_numericality_of :credit_score, less_than_or_equal_to: 620, message: "Sorry, your credit score is below the minimum required to obtain a mortgage."
   validate :proper_type_should_be_in_allowed_list
   validate :should_have_accepted_housing_expense_ratio
 
