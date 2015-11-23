@@ -1,0 +1,52 @@
+h1  Borrower Information
+.form-group.col-lg-6
+  = form_for(@borrower) do |f|
+    - if @borrower.errors.any?
+      .alert.alert-danger
+        h2 = pluralize(@borrower.errors.count, "error") 
+          | prohibited this post from being saved:
+        ul
+        - @borrower.errors.full_messages.each do |msg|
+          li
+            = msg
+    .form-group
+      = f.label :first_name
+      = f.text_field :first_name, class: 'form-control'
+    .form-group
+      = f.label :last_name
+      = f.text_field :last_name, class: 'form-control'
+    .form-group
+      = f.label :email
+      = f.text_field :email
+    .form-group
+      = f.label :credit_score
+      = f.text_field :credit_score
+    .form-group
+      = f.label :base_income
+      = f.text_field :base_income
+    .form-group
+      = f.label :rental_income
+      = f.text_field :rental_income
+    .form-group
+      = f.label :commission
+      = f.text_field :commission
+    .form-group
+      = f.label :mortage_payment
+      = f.text_field :mortage_payment
+    .form-group
+      = f.label :mortage_insurrance
+      = f.text_field :mortage_insurrance
+    .form-group
+      = f.label :homeowner_insurrance
+      = f.text_field :homeowner_insurrance
+    .form-group
+      = f.label :property_tax
+      = f.text_field :property_tax
+    .form-group
+      = f.label :hoa_due
+      = f.text_field :hoa_due
+    .form-group
+      = f.label :commission
+      = f.select :property_type, @property_types.map {|key,v| [key, v]}
+
+    = f.submit "Create", class: 'btn btn-primary'
