@@ -8,6 +8,7 @@ class Borrower < ActiveRecord::Base
   validates_numericality_of :rental_income, greater_than_or_equal_to: 0
   validates_numericality_of :credit_score, less_than_or_equal_to: 620
   validate :proper_type_should_be_in_allowed_list
+  validate :should_have_accepted_housing_expense_ratio
 
   def proper_type_should_be_in_allowed_list
     return if property_type.blank?
@@ -15,6 +16,18 @@ class Borrower < ActiveRecord::Base
     accepted_property_types = all_property_types.except('others')
     if property_type == Borrower.all_property_types['others']
       errors.add(:property_type, 'Sorry, your subject property is not eligible. We only offer loan programs for residential 1-4 units at this time')
+    end
+  end
+  def should_have_accepted_housing_expense_ratio
+    total_income = base_income + rental_income + commission
+    housing_expense = mortage_payment + mortage_insurrance + property_tax
+    housing_expense += homeowner_insurrance if homeowner_insurrance.present?
+    housing_expense += hoa_due if hoa_due.present?
+
+    housing_expense_ratio = housing_expense/total_income
+
+    if housing_expense_ratio > 0.28
+      errors.add(:housing_expense_ratio, "Your current housing expense is currently too high. We can't find any loan programs for you.")
     end
   end
 end
