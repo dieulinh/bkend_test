@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151123032731) do
+ActiveRecord::Schema.define(version: 20151123044623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,15 +21,15 @@ ActiveRecord::Schema.define(version: 20151123032731) do
     t.string  "last_name"
     t.string  "email"
     t.decimal "credit_score",         precision: 7, scale: 2
-    t.decimal "base_income",          precision: 7, scale: 2
-    t.decimal "rental_income",        precision: 7, scale: 2
-    t.decimal "commission",           precision: 7, scale: 2
+    t.decimal "base_income",          precision: 7, scale: 2, default: 0.0
+    t.decimal "rental_income",        precision: 7, scale: 2, default: 0.0
+    t.decimal "commission",           precision: 7, scale: 2, default: 0.0
     t.integer "property_type"
     t.string  "address"
-    t.decimal "mortage_payment",      precision: 7, scale: 2
-    t.decimal "mortage_insurrance",   precision: 7, scale: 2
+    t.decimal "mortage_payment",      precision: 7, scale: 2, default: 0.0
+    t.decimal "mortage_insurrance",   precision: 7, scale: 2, default: 0.0
     t.decimal "homeowner_insurrance", precision: 7, scale: 2
-    t.decimal "property_tax",         precision: 7, scale: 2
+    t.decimal "property_tax",         precision: 7, scale: 2, default: 0.0
     t.decimal "hoa_due",              precision: 7, scale: 2
   end
 
